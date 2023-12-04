@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  source:
+    path: general/apps
+    repoURL: 'https://github.com/morey-tech/argocd-example-apps'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: spec.destination.name
+          value: kind
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
