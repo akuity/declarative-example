@@ -6,7 +6,7 @@ ENV ARGOCD_VERSION=v2.9.3
 RUN curl -sSL -o /usr/local/bin/argocd "https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-amd64" \
     && chmod +x /usr/local/bin/argocd
 
-ENV AKUITY_VERSION=v0.9.3
+ENV AKUITY_VERSION=v0.9.5
 RUN curl -sSL -o /usr/local/bin/akuity "https://dl.akuity.io/akuity-cli/${AKUITY_VERSION}/linux/amd64/akuity" \
     && chmod +x /usr/local/bin/akuity
 
