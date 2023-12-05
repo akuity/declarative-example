@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helm-guestbook
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/morey-tech/argocd-example-apps'
+    path: general/helm-guestbook
+    targetRevision: HEAD
+  destination:
+    namespace: helm-guestbook
+    name: kind
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sync-waves
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/morey-tech/argocd-example-apps'
+    path: general/sync-waves
+    targetRevision: HEAD
+  destination:
+    namespace: sync-waves
+    name: kind
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

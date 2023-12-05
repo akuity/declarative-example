@@ -7,13 +7,10 @@ spec:
     name: in-cluster
     namespace: argocd
   source:
-    path: general/apps
-    repoURL: 'https://github.com/morey-tech/argocd-example-apps'
+    path: apps/
+    repoURL: 'https://github.com/akuity/declarative-example'
     targetRevision: HEAD
-    helm:
-      parameters:
-        - name: spec.destination.name
-          value: kind
+    directory: {}
   project: default
   syncPolicy:
     automated:

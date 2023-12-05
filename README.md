@@ -22,6 +22,10 @@ akuity argocd apply -f akuity-platform/example
   ```
   https://akuity.cloud/<name>/argocd/example
 
+This will create an Argo CD instance based the definition in the `argocd.yaml` manifest, and the configurations in the `argocd-cm.yaml` and `argocd-secret.yaml` (which follow the same format as the open-source).
+
+The `Application` in the `bootstrap-app.yaml` manifest will also be deployed. It points to a folder containing other `Applications` and `ApplicationSets`, therefore automatically bootstrapping your Argo CD instance.
+
 ### Connect the clusters
 Provision an agent for the cluster named `kind`.
 ```
@@ -51,4 +55,10 @@ The command on the second line is a bit complex, so let's break it down:
 ### List the Applications
 ```
 argocd app list
+```
+
+### Managing only Applications
+The `akuity argocd apply -f` command can apply a folder containing only `Applications`, `ApplicationSets`, and `AppProjects` without including an Argo CD definition by specifying the instance name with `--name`.
+```
+akuity argocd apply -f apps/ --name example
 ```
