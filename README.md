@@ -21,6 +21,7 @@ akuity argocd apply -f akuity-platform/example
 - View the instance in the UI at (replacing `<name>` with your organization name):
   ```
   https://akuity.cloud/<name>/argocd/example
+  ```
 
 This will create an Argo CD instance based the definition in the `argocd.yaml` manifest, and the configurations in the `argocd-cm.yaml` and `argocd-secret.yaml` (which follow the same format as the open-source).
 
