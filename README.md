@@ -47,3 +47,8 @@ The command on the second line is a bit complex, so let's break it down:
 - `akuity argocd instance get example -o json` will retrieve the Argo CD instance named `example` from your organization on the Akuity Platform and output the metadata in JSON.
 - The output is then piped to `jq -r '.id'`. We use `jq` here to filter the JSON output down to the `.id` attribute for the `example` Argo CD instance.
 - This is all encapsulated in `$(...)` which allows us to use the id as the sub-domain of the FQDN `<id>.cd.akuity.cloud` for the server URL in the `argocd login` command. 
+
+### List the Applications
+```
+argocd app list
+```
