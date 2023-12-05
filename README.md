@@ -24,7 +24,7 @@ akuity argocd apply -f akuity-platform/example
   ```
 
 ### Connect the clusters
-Provision on agent for the cluster named `kind`.
+Provision an agent for the cluster named `kind`.
 ```
 akuity argocd cluster create --instance-name=declarative-reference kind
 ```
@@ -43,3 +43,8 @@ argocd login \
     --password akuity-argocd \
     --grpc-web
 ```
+
+The command on the second line is a bit complex, so let's break it down:
+- `akuity argocd instance get -o json` will retrieve all of the Argo CD instances from your organization on the Akuity Platform and output the information in JSON.
+- The output is then piped to `jq -r '.[] | select(.name == "declarative-reference") | .id'`. We use `jq` here to filter the JSON output down to the item that contains `.name == "declarative-reference`. Then it outputs the `.id` attribute from that item.
+- This is all encapsulated in `$(...)` which allows us to use the id as the sub-domain of the FQDN `<id>.cd.akuity.cloud` for the server URL in the `argocd login` command. 
