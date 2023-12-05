@@ -1,4 +1,4 @@
-# Akuity Platform Declarative Reference
+# Akuity Platform Declarative Example
 A complete example of using the `akuity` CLI to declaratively manage Argo CD instances on the Akuity Platform.
 
 ## Manually Creating an Instance
