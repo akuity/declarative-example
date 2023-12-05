@@ -32,18 +32,18 @@ Apply the agent install manifests to the cluster.
 ```
 akuity argocd cluster get-agent-manifests --instance-name=example kind | kubectl apply -f -
 ```
-- Check the progress of the agent installation with `k get pods -n akuity`.
+- Check the progress of the agent installation with `kubectl get pods -n akuity`.
 
 ### Log into the `argocd` CLI
 ```
 argocd login \
-    $(akuity argocd instance get -o json | jq -r '.[] | select(.name == "example") | .id').cd.akuity.cloud \
+    $(akuity argocd instance get example -o json | jq -r '.id').cd.akuity.cloud \
     --username admin \
     --password akuity-argocd \
     --grpc-web
 ```
 
 The command on the second line is a bit complex, so let's break it down:
-- `akuity argocd instance get -o json` will retrieve all of the Argo CD instances from your organization on the Akuity Platform and output the information in JSON.
-- The output is then piped to `jq -r '.[] | select(.name == "example") | .id'`. We use `jq` here to filter the JSON output down to the item that contains `.name == "example`. Then it outputs the `.id` attribute from that item.
+- `akuity argocd instance get example -o json` will retrieve the Argo CD instance named `example` from your organization on the Akuity Platform and output the metadata in JSON.
+- The output is then piped to `jq -r '.id'`. We use `jq` here to filter the JSON output down to the `.id` attribute for the `example` Argo CD instance.
 - This is all encapsulated in `$(...)` which allows us to use the id as the sub-domain of the FQDN `<id>.cd.akuity.cloud` for the server URL in the `argocd login` command. 
