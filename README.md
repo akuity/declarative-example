@@ -27,6 +27,8 @@ This will create an Argo CD instance based the definition in the `argocd.yaml` m
 
 The `Application` in the `bootstrap-app.yaml` manifest will also be deployed. It points to a folder containing other `Applications` and `ApplicationSets`, therefore automatically bootstrapping your Argo CD instance.
 
+The `Applications` deployed by the `bootstrap` `Application` may appear in an `Unknown` sync status due to the unavilable destination cluster at the time of creation. After completing the next step, they will eventually retry (up to 5 minutes) and sync successfully. You can speed this up by clicking refresh after the agent has become healthy on the cluster.
+
 ### Connect the clusters
 Provision an agent for the cluster named `kind`.
 ```
