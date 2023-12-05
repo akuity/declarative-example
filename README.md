@@ -60,6 +60,14 @@ The command on the second line is a bit complex, so let's break it down:
 argocd app list
 ```
 
+Example output:
+```
+NAME                   CLUSTER     NAMESPACE       PROJECT  STATUS  HEALTH   SYNCPOLICY  CONDITIONS  REPO                                               PATH                    TARGET
+argocd/bootstrap       in-cluster  argocd          default  Synced  Healthy  Auto-Prune  <none>      https://github.com/akuity/declarative-example      apps/                   HEAD
+argocd/helm-guestbook  kind        helm-guestbook  default  Synced  Healthy  Auto-Prune  <none>      https://github.com/morey-tech/argocd-example-apps  general/helm-guestbook  HEAD
+argocd/sync-waves      kind        sync-waves      default  Synced  Healthy  Auto-Prune  <none>      https://github.com/morey-tech/argocd-example-apps  general/sync-waves      HEAD
+```
+
 ### Managing only Applications
 The `akuity argocd apply -f` command can apply a folder containing only `Applications`, `ApplicationSets`, and `AppProjects` without including an Argo CD definition by specifying the instance name with `--name`.
 ```
