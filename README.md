@@ -25,16 +25,13 @@ akuity argocd apply -f akuity-platform/example
 
 This will create an Argo CD instance based the definition in the `argocd.yaml` manifest, and the configurations in the `argocd-cm.yaml` and `argocd-secret.yaml` (which follow the same format as the open-source).
 
+The `cluster.yaml` manifest contains the configuration for provisioning an agent that will connect a Kubernetes cluster to the Argo CD instance. In the next step, you'll install the agent into the cluster.
+
 The `Application` in the `bootstrap-app.yaml` manifest will also be deployed. It points to a folder containing other `Applications` and `ApplicationSets`, therefore automatically bootstrapping your Argo CD instance.
 
 The `Applications` deployed by the `bootstrap` `Application` may appear in an `Unknown` sync status due to the unavilable destination cluster at the time of creation. After completing the next step, they will eventually retry (up to 5 minutes) and sync successfully. You can speed this up by clicking refresh after the agent has become healthy on the cluster.
 
 ### Connect the clusters
-Provision an agent for the cluster named `kind`.
-```
-akuity argocd cluster create --instance-name=example kind
-```
-
 Apply the agent install manifests to the cluster.
 ```
 akuity argocd cluster get-agent-manifests --instance-name=example kind | kubectl apply -f -
